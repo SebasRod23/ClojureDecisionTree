@@ -14271,19 +14271,29 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Columnas">Columnas<a class="anchor-link" href="#Columnas">&#182;</a></h1>
+<h2 id="Introducci&#243;n">Introducci&#243;n<a class="anchor-link" href="#Introducci&#243;n">&#182;</a></h2><p>Para este trabajo vamos a utilizar las dependencias de:</p>
+<ul>
+<li>clojure.data.csv para leer el csv y obtener los datos para el árbol de decisión</li>
+<li>decision-tree.core para el procesamiento y obtener un árbol de decisión. Implementado por Miyoshi Ryota</li>
+<li>clojupyter.display para renderear un svg </li>
+</ul>
+
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojupyter.misc.helper</span> <span class="ss">:as</span> <span class="nv">helper</span><span class="p">])</span>
 <span class="p">(</span><span class="nf">helper/add-dependencies</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">mrcsce/decision-tree</span> <span class="s">&quot;0.1.0&quot;</span><span class="p">])</span>
 <span class="p">(</span><span class="nf">helper/add-dependencies</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">org.clojure/data.csv</span> <span class="s">&quot;0.1.2&quot;</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">helper/add-dependencies</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clj-http</span> <span class="s">&quot;3.11.0&quot;</span><span class="p">])</span>
 <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.data.csv</span> <span class="ss">:as</span> <span class="nv">csv</span><span class="p">])</span>
 <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">decision-tree.core</span> <span class="ss">:as</span> <span class="nv">dt</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojupyter.display</span> <span class="ss">:as</span> <span class="nv">display</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.inspector</span> <span class="ss">:as</span> <span class="nv">inspector</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clj-http.client</span> <span class="ss">:as</span> <span class="nv">client</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14299,7 +14309,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
 
 
 
@@ -14317,7 +14327,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">wineQuality</span><span class="p">(</span><span class="nb">with-open </span><span class="p">[</span><span class="nv">in-file</span> <span class="p">(</span><span class="nf">clojure.java.io/reader</span> <span class="s">&quot;winequality-red.csv&quot;</span><span class="p">)]</span> 
@@ -14337,7 +14347,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14355,7 +14365,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defrecord </span><span class="nv">Wine</span> <span class="p">[</span><span class="nv">fixed_acidity</span> <span class="nv">volatile_acidity</span> <span class="nv">citrid_acid</span> <span class="nv">chlorides</span> <span class="nv">sulphates</span> <span class="nv">alcohol</span> <span class="nv">quality</span><span class="p">])</span>
@@ -14374,7 +14384,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14392,7 +14402,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">vectorToWine</span> <span class="p">[</span><span class="nv">v</span><span class="p">]</span>
@@ -14419,7 +14429,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[32]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -14437,7 +14447,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">data</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">vectorToWine</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">wineQuality</span><span class="p">)))</span>
@@ -14457,7 +14467,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -14481,7 +14491,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">trainingData</span> <span class="p">(</span><span class="nb">take </span><span class="mi">1279</span> <span class="nv">data</span><span class="p">))</span>
@@ -14501,7 +14511,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -14519,7 +14529,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">testingData</span> <span class="p">(</span><span class="nb">drop </span><span class="mi">1279</span> <span class="nv">data</span><span class="p">))</span>
@@ -14539,7 +14549,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
 
 
@@ -14557,7 +14567,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">tree</span> <span class="p">(</span><span class="nf">dt/make-decision-tree</span> <span class="nv">trainingData</span> <span class="mi">3</span> <span class="ss">:quality</span><span class="p">))</span>
@@ -14576,7 +14586,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -14594,7 +14604,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">testCollection</span> <span class="p">[</span><span class="nv">tree</span> <span class="nv">testColl</span><span class="p">]</span> 
@@ -14617,7 +14627,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
 
 
@@ -14635,7 +14645,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nb">* </span><span class="mf">100.0</span> <span class="p">(</span><span class="nf">testCollection</span> <span class="nv">tree</span> <span class="nv">testingData</span><span class="p">))</span>
@@ -14654,7 +14664,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
@@ -14672,11 +14682,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojupyter.display</span> <span class="ss">:as</span> <span class="nv">display</span><span class="p">])</span>
-<span class="p">(</span><span class="nf">display/html</span> <span class="p">(</span><span class="nb">slurp </span><span class="s">&quot;https://quickchart.io/graphviz?graph=digraph{nodo1-&gt;nodo2-&gt;nodo3;nodo1-&gt;nodo3}&quot;</span><span class="p">))</span>
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">inspector/inspect-tree</span> <span class="nv">tree</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14692,7 +14701,66 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#object[javax.swing.JFrame 0x682eaa4a &#34;javax.swing.JFrame[frame0,0,0,400x600,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,8,31,384x561,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]&#34;]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">generateLeaf</span> <span class="p">[</span><span class="nb">node </span><span class="nv">leaf-name</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">str </span><span class="nv">leaf-name</span> <span class="s">&quot;[label=\&quot;&quot;</span> <span class="p">(</span><span class="ss">:predict</span> <span class="nv">node</span><span class="p">)</span> <span class="s">&quot;\&quot;]&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">generateTree</span> <span class="p">[</span><span class="nb">node </span><span class="nv">root-name</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">left-node</span> <span class="p">(</span><span class="ss">:left</span> <span class="nv">node</span><span class="p">)</span>
+          <span class="nv">left-name</span> <span class="p">(</span><span class="nb">str </span><span class="nv">root-name</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+          <span class="nv">right-node</span> <span class="p">(</span><span class="ss">:right</span> <span class="nv">node</span><span class="p">)</span>
+          <span class="nv">right-name</span> <span class="p">(</span><span class="nb">str </span><span class="nv">root-name</span> <span class="s">&quot;r&quot;</span><span class="p">)]</span>
+        <span class="p">(</span><span class="nf">clojure.string/join</span> <span class="s">&quot;;&quot;</span> <span class="p">[</span>
+            <span class="p">(</span><span class="nb">str </span><span class="nv">root-name</span> <span class="s">&quot;[label=\&quot;&quot;</span> <span class="p">(</span><span class="ss">:feature</span> <span class="nv">node</span><span class="p">)</span> <span class="s">&quot;\&quot;]&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">str </span><span class="nv">root-name</span> <span class="s">&quot;-&gt;&quot;</span> <span class="nv">left-name</span> <span class="s">&quot;[label=\&quot;&gt; &quot;</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">node</span><span class="p">)</span> <span class="s">&quot;\&quot;]&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">str </span><span class="nv">root-name</span> <span class="s">&quot;-&gt;&quot;</span> <span class="nv">right-name</span> <span class="s">&quot;[label=\&quot;&lt; &quot;</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">node</span><span class="p">)</span> <span class="s">&quot;\&quot;]&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">nil? </span><span class="p">(</span><span class="ss">:feature</span> <span class="nv">left-node</span><span class="p">))</span>
+                <span class="p">(</span><span class="nf">generateLeaf</span> <span class="nv">left-node</span> <span class="nv">left-name</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">generateTree</span> <span class="nv">left-node</span> <span class="nv">left-name</span><span class="p">))</span>
+            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">nil? </span><span class="p">(</span><span class="ss">:feature</span> <span class="nv">right-node</span><span class="p">))</span>
+                <span class="p">(</span><span class="nf">generateLeaf</span> <span class="nv">right-node</span> <span class="nv">right-name</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">generateTree</span> <span class="nv">right-node</span> <span class="nv">right-name</span><span class="p">))])))</span>
+
+
+<span class="p">(</span><span class="k">def </span><span class="nv">nombre</span> <span class="p">(</span><span class="nf">generateTree</span> <span class="nv">tree</span> <span class="s">&quot;r&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">display/html</span> <span class="p">(</span><span class="ss">:body</span> <span class="p">(</span><span class="nf">client/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;https://quickchart.io/graphviz?graph=digraph{&quot;</span> <span class="nv">nombre</span> <span class="s">&quot;}&quot;</span><span class="p">))))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
 
 
 
@@ -14703,46 +14771,198 @@ a.anchor-link {
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
 <!-- Title: %0 Pages: 1 -->
-<svg width="109pt" height="188pt"
- viewBox="0.00 0.00 109.36 188.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<svg width="1119pt" height="310pt"
+ viewBox="0.00 0.00 1119.21 310.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 306.4)">
 <title>%0</title>
-<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-184 105.3577,-184 105.3577,4 -4,4"/>
-<!-- nodo1 -->
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-306.4 1115.2088,-306.4 1115.2088,4 -4,4"/>
+<!-- r -->
 <g id="node1" class="node">
-<title>nodo1</title>
-<ellipse fill="none" stroke="#000000" cx="66.1789" cy="-162" rx="35.3587" ry="18"/>
-<text text-anchor="middle" x="66.1789" y="-157.8" font-family="Times,serif" font-size="14.00" fill="#000000">nodo1</text>
+<title>r</title>
+<ellipse fill="none" stroke="#000000" cx="520.1044" cy="-284.4" rx="42.2932" ry="18"/>
+<text text-anchor="middle" x="520.1044" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">:alcohol</text>
 </g>
-<!-- nodo2 -->
+<!-- rl -->
 <g id="node2" class="node">
-<title>nodo2</title>
-<ellipse fill="none" stroke="#000000" cx="35.1789" cy="-90" rx="35.3587" ry="18"/>
-<text text-anchor="middle" x="35.1789" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#000000">nodo2</text>
+<title>rl</title>
+<ellipse fill="none" stroke="#000000" cx="378.1044" cy="-195.6" rx="42.2932" ry="18"/>
+<text text-anchor="middle" x="378.1044" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">:alcohol</text>
 </g>
-<!-- nodo1&#45;&gt;nodo2 -->
+<!-- r&#45;&gt;rl -->
 <g id="edge1" class="edge">
-<title>nodo1&#45;&gt;nodo2</title>
-<path fill="none" stroke="#000000" d="M58.5159,-144.2022C54.9872,-136.0064 50.723,-126.1024 46.8101,-117.0145"/>
-<polygon fill="#000000" stroke="#000000" points="49.923,-115.3938 42.7536,-107.593 43.4936,-118.162 49.923,-115.3938"/>
+<title>r&#45;&gt;rl</title>
+<path fill="none" stroke="#000000" d="M496.016,-269.3363C472.658,-254.7293 437.0388,-232.4548 411.0614,-216.2098"/>
+<polygon fill="#000000" stroke="#000000" points="412.6454,-213.0723 402.3109,-210.7376 408.9338,-219.0073 412.6454,-213.0723"/>
+<text text-anchor="middle" x="476.5517" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 9.8</text>
 </g>
-<!-- nodo3 -->
+<!-- rr -->
 <g id="node3" class="node">
-<title>nodo3</title>
-<ellipse fill="none" stroke="#000000" cx="66.1789" cy="-18" rx="35.3587" ry="18"/>
-<text text-anchor="middle" x="66.1789" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">nodo3</text>
+<title>rr</title>
+<ellipse fill="none" stroke="#000000" cx="688.1044" cy="-195.6" rx="49.8156" ry="18"/>
+<text text-anchor="middle" x="688.1044" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">:sulphates</text>
 </g>
-<!-- nodo1&#45;&gt;nodo3 -->
-<g id="edge3" class="edge">
-<title>nodo1&#45;&gt;nodo3</title>
-<path fill="none" stroke="#000000" d="M71.5879,-144.1926C74.4743,-133.7568 77.7243,-120.2568 79.1789,-108 81.0644,-92.1115 81.0644,-87.8885 79.1789,-72 78.1448,-63.2862 76.2032,-53.944 74.13,-45.5212"/>
-<polygon fill="#000000" stroke="#000000" points="77.5056,-44.5955 71.5879,-35.8074 70.7337,-46.3677 77.5056,-44.5955"/>
-</g>
-<!-- nodo2&#45;&gt;nodo3 -->
+<!-- r&#45;&gt;rr -->
 <g id="edge2" class="edge">
-<title>nodo2&#45;&gt;nodo3</title>
-<path fill="none" stroke="#000000" d="M42.8418,-72.2022C46.3706,-64.0064 50.6348,-54.1024 54.5476,-45.0145"/>
-<polygon fill="#000000" stroke="#000000" points="57.8641,-46.162 58.6041,-35.593 51.4348,-43.3938 57.8641,-46.162"/>
+<title>r&#45;&gt;rr</title>
+<path fill="none" stroke="#000000" d="M546.7245,-270.3294C574.8506,-255.4627 619.4172,-231.9061 650.9866,-215.2194"/>
+<polygon fill="#000000" stroke="#000000" points="652.7219,-218.2611 659.9273,-210.4936 649.4507,-212.0724 652.7219,-218.2611"/>
+<text text-anchor="middle" x="634.5517" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 9.8</text>
+</g>
+<!-- rll -->
+<g id="node4" class="node">
+<title>rll</title>
+<ellipse fill="none" stroke="#000000" cx="202.1044" cy="-106.8" rx="73.5907" ry="18"/>
+<text text-anchor="middle" x="202.1044" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">:volatile_acidity</text>
+</g>
+<!-- rl&#45;&gt;rll -->
+<g id="edge3" class="edge">
+<title>rl&#45;&gt;rll</title>
+<path fill="none" stroke="#000000" d="M350.6044,-181.725C321.8837,-167.2341 276.4989,-144.3354 243.4563,-127.6639"/>
+<polygon fill="#000000" stroke="#000000" points="244.9926,-124.5188 234.488,-123.139 241.8394,-130.7684 244.9926,-124.5188"/>
+<text text-anchor="middle" x="324.0517" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 11.2</text>
+</g>
+<!-- rlr -->
+<g id="node5" class="node">
+<title>rlr</title>
+<ellipse fill="none" stroke="#000000" cx="378.1044" cy="-106.8" rx="49.8156" ry="18"/>
+<text text-anchor="middle" x="378.1044" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">:sulphates</text>
+</g>
+<!-- rl&#45;&gt;rlr -->
+<g id="edge4" class="edge">
+<title>rl&#45;&gt;rlr</title>
+<path fill="none" stroke="#000000" d="M378.1044,-177.2006C378.1044,-165.0949 378.1044,-149.0076 378.1044,-135.2674"/>
+<polygon fill="#000000" stroke="#000000" points="381.6045,-134.872 378.1044,-124.872 374.6045,-134.8721 381.6045,-134.872"/>
+<text text-anchor="middle" x="396.0517" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 11.2</text>
+</g>
+<!-- rrl -->
+<g id="node10" class="node">
+<title>rrl</title>
+<ellipse fill="none" stroke="#000000" cx="688.1044" cy="-106.8" rx="64.8447" ry="18"/>
+<text text-anchor="middle" x="688.1044" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">:fixed_acidity</text>
+</g>
+<!-- rr&#45;&gt;rrl -->
+<g id="edge9" class="edge">
+<title>rr&#45;&gt;rrl</title>
+<path fill="none" stroke="#000000" d="M688.1044,-177.2006C688.1044,-165.0949 688.1044,-149.0076 688.1044,-135.2674"/>
+<polygon fill="#000000" stroke="#000000" points="691.6045,-134.872 688.1044,-124.872 684.6045,-134.8721 691.6045,-134.872"/>
+<text text-anchor="middle" x="706.0517" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 0.57</text>
+</g>
+<!-- rrr -->
+<g id="node11" class="node">
+<title>rrr</title>
+<ellipse fill="none" stroke="#000000" cx="913.1044" cy="-106.8" rx="49.2338" ry="18"/>
+<text text-anchor="middle" x="913.1044" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">:chlorides</text>
+</g>
+<!-- rr&#45;&gt;rrr -->
+<g id="edge10" class="edge">
+<title>rr&#45;&gt;rrr</title>
+<path fill="none" stroke="#000000" d="M721.7892,-182.3057C761.3378,-166.6972 827.0013,-140.782 870.1698,-123.7448"/>
+<polygon fill="#000000" stroke="#000000" points="871.5405,-126.9667 879.5573,-120.0399 868.9706,-120.4555 871.5405,-126.9667"/>
+<text text-anchor="middle" x="839.0517" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 0.57</text>
+</g>
+<!-- rlll -->
+<g id="node6" class="node">
+<title>rlll</title>
+<ellipse fill="none" stroke="#000000" cx="60.1044" cy="-18" rx="60.209" ry="18"/>
+<text text-anchor="middle" x="60.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">mala calidad</text>
+</g>
+<!-- rll&#45;&gt;rlll -->
+<g id="edge5" class="edge">
+<title>rll&#45;&gt;rlll</title>
+<path fill="none" stroke="#000000" d="M175.0611,-89.8884C152.2708,-75.6364 119.5186,-55.1548 94.7991,-39.6964"/>
+<polygon fill="#000000" stroke="#000000" points="96.4231,-36.584 86.0887,-34.2493 92.7116,-42.5191 96.4231,-36.584"/>
+<text text-anchor="middle" x="162.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 0.76</text>
+</g>
+<!-- rllr -->
+<g id="node7" class="node">
+<title>rllr</title>
+<ellipse fill="none" stroke="#000000" cx="202.1044" cy="-18" rx="64.2882" ry="18"/>
+<text text-anchor="middle" x="202.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">buena calidad</text>
+</g>
+<!-- rll&#45;&gt;rllr -->
+<g id="edge6" class="edge">
+<title>rll&#45;&gt;rllr</title>
+<path fill="none" stroke="#000000" d="M202.1044,-88.4006C202.1044,-76.2949 202.1044,-60.2076 202.1044,-46.4674"/>
+<polygon fill="#000000" stroke="#000000" points="205.6045,-46.072 202.1044,-36.072 198.6045,-46.0721 205.6045,-46.072"/>
+<text text-anchor="middle" x="220.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 0.76</text>
+</g>
+<!-- rlrl -->
+<g id="node8" class="node">
+<title>rlrl</title>
+<ellipse fill="none" stroke="#000000" cx="349.1044" cy="-18" rx="64.2882" ry="18"/>
+<text text-anchor="middle" x="349.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">buena calidad</text>
+</g>
+<!-- rlr&#45;&gt;rlrl -->
+<g id="edge7" class="edge">
+<title>rlr&#45;&gt;rlrl</title>
+<path fill="none" stroke="#000000" d="M372.2358,-88.83C368.1871,-76.4327 362.7269,-59.713 358.1281,-45.6312"/>
+<polygon fill="#000000" stroke="#000000" points="361.3958,-44.3626 354.9643,-35.9433 354.7417,-46.5358 361.3958,-44.3626"/>
+<text text-anchor="middle" x="385.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 0.54</text>
+</g>
+<!-- rlrr -->
+<g id="node9" class="node">
+<title>rlrr</title>
+<ellipse fill="none" stroke="#000000" cx="491.1044" cy="-18" rx="60.209" ry="18"/>
+<text text-anchor="middle" x="491.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">mala calidad</text>
+</g>
+<!-- rlr&#45;&gt;rlrr -->
+<g id="edge8" class="edge">
+<title>rlr&#45;&gt;rlrr</title>
+<path fill="none" stroke="#000000" d="M399.094,-90.3055C416.6301,-76.5249 441.8413,-56.713 461.4405,-41.3111"/>
+<polygon fill="#000000" stroke="#000000" points="463.7578,-43.9415 469.4579,-35.0107 459.4326,-38.4376 463.7578,-43.9415"/>
+<text text-anchor="middle" x="463.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 0.54</text>
+</g>
+<!-- rrll -->
+<g id="node12" class="node">
+<title>rrll</title>
+<ellipse fill="none" stroke="#000000" cx="633.1044" cy="-18" rx="64.2882" ry="18"/>
+<text text-anchor="middle" x="633.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">buena calidad</text>
+</g>
+<!-- rrl&#45;&gt;rrll -->
+<g id="edge11" class="edge">
+<title>rrl&#45;&gt;rrll</title>
+<path fill="none" stroke="#000000" d="M676.9743,-88.83C669.1467,-76.1919 658.537,-59.062 649.7122,-44.814"/>
+<polygon fill="#000000" stroke="#000000" points="652.459,-42.6018 644.2179,-35.9433 646.508,-46.2877 652.459,-42.6018"/>
+<text text-anchor="middle" x="684.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 10.7</text>
+</g>
+<!-- rrlr -->
+<g id="node13" class="node">
+<title>rrlr</title>
+<ellipse fill="none" stroke="#000000" cx="775.1044" cy="-18" rx="60.209" ry="18"/>
+<text text-anchor="middle" x="775.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">mala calidad</text>
+</g>
+<!-- rrl&#45;&gt;rrlr -->
+<g id="edge12" class="edge">
+<title>rrl&#45;&gt;rrlr</title>
+<path fill="none" stroke="#000000" d="M705.2928,-89.256C718.2811,-75.999 736.2823,-57.6254 750.7521,-42.8562"/>
+<polygon fill="#000000" stroke="#000000" points="753.4535,-45.1001 757.9517,-35.5076 748.4533,-40.2013 753.4535,-45.1001"/>
+<text text-anchor="middle" x="758.0517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 10.7</text>
+</g>
+<!-- rrrl -->
+<g id="node14" class="node">
+<title>rrrl</title>
+<ellipse fill="none" stroke="#000000" cx="913.1044" cy="-18" rx="60.209" ry="18"/>
+<text text-anchor="middle" x="913.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">mala calidad</text>
+</g>
+<!-- rrr&#45;&gt;rrrl -->
+<g id="edge13" class="edge">
+<title>rrr&#45;&gt;rrrl</title>
+<path fill="none" stroke="#000000" d="M913.1044,-88.4006C913.1044,-76.2949 913.1044,-60.2076 913.1044,-46.4674"/>
+<polygon fill="#000000" stroke="#000000" points="916.6045,-46.072 913.1044,-36.072 909.6045,-46.0721 916.6045,-46.072"/>
+<text text-anchor="middle" x="934.5517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&gt; 0.079</text>
+</g>
+<!-- rrrr -->
+<g id="node15" class="node">
+<title>rrrr</title>
+<ellipse fill="none" stroke="#000000" cx="1051.1044" cy="-18" rx="60.209" ry="18"/>
+<text text-anchor="middle" x="1051.1044" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">mala calidad</text>
+</g>
+<!-- rrr&#45;&gt;rrrr -->
+<g id="edge14" class="edge">
+<title>rrr&#45;&gt;rrrr</title>
+<path fill="none" stroke="#000000" d="M937.4584,-91.1288C959.5108,-76.9385 992.2258,-55.8871 1016.9,-40.0098"/>
+<polygon fill="#000000" stroke="#000000" points="1019.0765,-42.7713 1025.592,-34.4167 1015.2886,-36.8847 1019.0765,-42.7713"/>
+<text text-anchor="middle" x="1015.5517" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">&lt; 0.079</text>
 </g>
 </g>
 </svg>
@@ -14753,6 +14973,20 @@ a.anchor-link {
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
