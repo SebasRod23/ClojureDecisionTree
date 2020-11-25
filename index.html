@@ -14276,170 +14276,13 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">cemerick.pomegranate</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">add-dependencies</span><span class="p">]])</span>
 <span class="p">(</span><span class="nf">add-dependencies</span> <span class="ss">:coordinates</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/data.csv</span> <span class="s">&quot;0.1.2&quot;</span><span class="p">]])</span>
 <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.data.csv</span> <span class="ss">:as</span> <span class="nv">csv</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>nil</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">wineQuality</span><span class="p">(</span><span class="nb">with-open </span><span class="p">[</span><span class="nv">in-file</span> <span class="p">(</span><span class="nf">clojure.java.io/reader</span> <span class="s">&quot;winequality-red.csv&quot;</span><span class="p">)]</span> 
-    <span class="p">(</span><span class="nb">doall </span><span class="p">(</span><span class="nf">csv/read-csv</span> <span class="nv">in-file</span><span class="p">))))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>#&#39;user/wineQuality</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defrecord </span><span class="nv">Wine</span> <span class="p">[</span><span class="nv">fixed_acidity</span> <span class="nv">volatile_acidity</span> <span class="nv">citrid_acid</span> <span class="nv">chlorides</span> <span class="nv">sulphates</span> <span class="nv">alcohol</span> <span class="nv">quality</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>user.Wine</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">vectorToWine</span> <span class="p">[</span><span class="nv">v</span><span class="p">]</span>
-    <span class="p">(</span><span class="nf">Wine.</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">0</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">4</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">9</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">10</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">Integer.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">11</span><span class="p">))))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>#&#39;user/vectorToWine</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">data</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">vectorToWine</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">wineQuality</span><span class="p">)))</span>
-<span class="p">(</span><span class="nb">take </span><span class="mi">5</span> <span class="nv">data</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.spec.alpha</span> <span class="ss">:as</span> <span class="nv">s</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14461,7 +14304,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(#user.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality 5} #user.Wine{:fixed_acidity 7.8, :volatile_acidity 0.88, :citrid_acid 0.0, :chlorides 0.098, :sulphates 0.68, :alcohol 9.8, :quality 5} #user.Wine{:fixed_acidity 7.8, :volatile_acidity 0.76, :citrid_acid 0.04, :chlorides 0.092, :sulphates 0.65, :alcohol 9.8, :quality 5} #user.Wine{:fixed_acidity 11.2, :volatile_acidity 0.28, :citrid_acid 0.56, :chlorides 0.075, :sulphates 0.58, :alcohol 9.8, :quality 6} #user.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality 5})</pre>
+<pre>nil</pre>
 </div>
 
 </div>
@@ -14470,20 +14313,51 @@ a.anchor-link {
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">wineQuality</span><span class="p">(</span><span class="nb">with-open </span><span class="p">[</span><span class="nv">in-file</span> <span class="p">(</span><span class="nf">clojure.java.io/reader</span> <span class="s">&quot;winequality-red.csv&quot;</span><span class="p">)]</span> 
+    <span class="p">(</span><span class="nb">doall </span><span class="p">(</span><span class="nf">csv/read-csv</span> <span class="nv">in-file</span><span class="p">))))</span>
+</pre></div>
+
+     </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Divisi&#243;n-del-dataset">Divisi&#243;n del dataset<a class="anchor-link" href="#Divisi&#243;n-del-dataset">&#182;</a></h1><p>En total tenemos 1,599 datos. De los cuales los primeros 1,279 (80% del total) se utilizarán para entrenar el modelo de machine learning. Los 320 (20% del total) datos restantes se utilizarán realizar las pruebas.</p>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#&#39;decision-tree.core/wineQuality</pre>
+</div>
 
 </div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">trainingData</span> <span class="p">(</span><span class="nb">take </span><span class="mi">1279</span> <span class="nv">data</span><span class="p">))</span>
-<span class="p">(</span><span class="nb">take </span><span class="mi">5</span> <span class="nv">trainingData</span><span class="p">)</span>
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defrecord </span><span class="nv">Wine</span> <span class="p">[</span><span class="nv">fixed_acidity</span> <span class="nv">volatile_acidity</span> <span class="nv">citrid_acid</span> <span class="nv">chlorides</span> <span class="nv">sulphates</span> <span class="nv">alcohol</span> <span class="nv">quality</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14505,7 +14379,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(#user.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality 5} #user.Wine{:fixed_acidity 7.8, :volatile_acidity 0.88, :citrid_acid 0.0, :chlorides 0.098, :sulphates 0.68, :alcohol 9.8, :quality 5} #user.Wine{:fixed_acidity 7.8, :volatile_acidity 0.76, :citrid_acid 0.04, :chlorides 0.092, :sulphates 0.65, :alcohol 9.8, :quality 5} #user.Wine{:fixed_acidity 11.2, :volatile_acidity 0.28, :citrid_acid 0.56, :chlorides 0.075, :sulphates 0.58, :alcohol 9.8, :quality 6} #user.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality 5})</pre>
+<pre>decision_tree.core.Wine</pre>
 </div>
 
 </div>
@@ -14517,7 +14391,134 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">vectorToWine</span> <span class="p">[</span><span class="nv">v</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">Wine.</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">9</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt; </span><span class="mf">5.5</span> <span class="p">(</span><span class="nf">Integer.</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">v</span> <span class="mi">11</span><span class="p">)))</span> <span class="s">&quot;buena calidad&quot;</span> <span class="s">&quot;mala calidad&quot;</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#&#39;decision-tree.core/vectorToWine</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">data</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">vectorToWine</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">wineQuality</span><span class="p">)))</span>
+<span class="p">(</span><span class="nb">take </span><span class="mi">5</span> <span class="nv">data</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>(#decision_tree.core.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.8, :volatile_acidity 0.88, :citrid_acid 0.0, :chlorides 0.098, :sulphates 0.68, :alcohol 9.8, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.8, :volatile_acidity 0.76, :citrid_acid 0.04, :chlorides 0.092, :sulphates 0.65, :alcohol 9.8, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 11.2, :volatile_acidity 0.28, :citrid_acid 0.56, :chlorides 0.075, :sulphates 0.58, :alcohol 9.8, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality &#34;mala calidad&#34;})</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Divisi&#243;n-del-dataset">Divisi&#243;n del dataset<a class="anchor-link" href="#Divisi&#243;n-del-dataset">&#182;</a></h1><p>En total tenemos 1,599 datos. De los cuales los primeros 1,279 (80% del total) se utilizarán para entrenar el modelo de machine learning. Los 320 (20% del total) datos restantes se utilizarán realizar las pruebas.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">trainingData</span> <span class="p">(</span><span class="nb">take </span><span class="mi">1279</span> <span class="nv">data</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">take </span><span class="mi">5</span> <span class="nv">trainingData</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>(#decision_tree.core.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.8, :volatile_acidity 0.88, :citrid_acid 0.0, :chlorides 0.098, :sulphates 0.68, :alcohol 9.8, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.8, :volatile_acidity 0.76, :citrid_acid 0.04, :chlorides 0.092, :sulphates 0.65, :alcohol 9.8, :quality &#34;mala calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 11.2, :volatile_acidity 0.28, :citrid_acid 0.56, :chlorides 0.075, :sulphates 0.58, :alcohol 9.8, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.4, :volatile_acidity 0.7, :citrid_acid 0.0, :chlorides 0.076, :sulphates 0.56, :alcohol 9.4, :quality &#34;mala calidad&#34;})</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">testingData</span> <span class="p">(</span><span class="nb">drop </span><span class="mi">1279</span> <span class="nv">data</span><span class="p">))</span>
@@ -14537,13 +14538,419 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(#user.Wine{:fixed_acidity 9.8, :volatile_acidity 0.3, :citrid_acid 0.39, :chlorides 0.062, :sulphates 0.57, :alcohol 11.5, :quality 7} #user.Wine{:fixed_acidity 7.1, :volatile_acidity 0.46, :citrid_acid 0.2, :chlorides 0.077, :sulphates 0.64, :alcohol 10.4, :quality 6} #user.Wine{:fixed_acidity 7.1, :volatile_acidity 0.46, :citrid_acid 0.2, :chlorides 0.077, :sulphates 0.64, :alcohol 10.4, :quality 6} #user.Wine{:fixed_acidity 7.9, :volatile_acidity 0.765, :citrid_acid 0.0, :chlorides 0.084, :sulphates 0.68, :alcohol 10.9, :quality 6} #user.Wine{:fixed_acidity 8.7, :volatile_acidity 0.63, :citrid_acid 0.28, :chlorides 0.096, :sulphates 0.63, :alcohol 10.2, :quality 6})</pre>
+<pre>(#decision_tree.core.Wine{:fixed_acidity 9.8, :volatile_acidity 0.3, :citrid_acid 0.39, :chlorides 0.062, :sulphates 0.57, :alcohol 11.5, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.1, :volatile_acidity 0.46, :citrid_acid 0.2, :chlorides 0.077, :sulphates 0.64, :alcohol 10.4, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.1, :volatile_acidity 0.46, :citrid_acid 0.2, :chlorides 0.077, :sulphates 0.64, :alcohol 10.4, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 7.9, :volatile_acidity 0.765, :citrid_acid 0.0, :chlorides 0.084, :sulphates 0.68, :alcohol 10.9, :quality &#34;buena calidad&#34;} #decision_tree.core.Wine{:fixed_acidity 8.7, :volatile_acidity 0.63, :citrid_acid 0.28, :chlorides 0.096, :sulphates 0.63, :alcohol 10.2, :quality &#34;buena calidad&#34;})</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn- </span><span class="nv">update-key</span>
+  <span class="p">[</span><span class="nv">from-key</span> <span class="nv">to-key</span> <span class="nv">map</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="nb">keyword? </span><span class="nv">from-key</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="nb">keyword? </span><span class="nv">to-key</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="nb">map? </span><span class="nv">map</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="nb">map? </span><span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">map</span>
+      <span class="p">(</span><span class="nb">assoc </span><span class="nv">to-key</span> <span class="p">(</span><span class="nf">from-key</span> <span class="nv">map</span><span class="p">))</span>
+      <span class="p">(</span><span class="nb">dissoc </span><span class="nv">from-key</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">update-value</span>
+  <span class="p">[</span><span class="nb">map key </span><span class="nv">updated-value</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="nb">map? </span><span class="nv">map</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="nb">keyword? </span><span class="nv">key</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="nb">map? </span><span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="nf">update</span> <span class="nb">map key </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nb">identity </span><span class="nv">updated-value</span><span class="p">))))</span>
+
+
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::objective-variable</span> <span class="nv">string?</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::objective-variable-vector</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="ss">::objective-variable</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">gini-impurity</span>
+  <span class="p">[</span><span class="nv">y</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::objective-variable-vector</span> <span class="nv">y</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="p">(</span><span class="nf">s/and</span> <span class="nv">number?</span> <span class="o">#</span><span class="p">(</span><span class="nb">&lt;= </span><span class="mi">0</span> <span class="nv">%</span> <span class="mi">1</span><span class="p">))</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">number-of-each-data</span> <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">y</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nb">comp count </span><span class="nv">val</span><span class="p">)))</span>
+        <span class="nv">sum-of-number-of-data</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">number-of-each-data</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">number-of-each-data</span>
+         <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">/ </span><span class="nv">%</span> <span class="nv">sum-of-number-of-data</span><span class="p">))</span>
+         <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">Math/pow</span> <span class="nv">%</span> <span class="mi">2</span><span class="p">))</span>
+         <span class="p">(</span><span class="nb">apply </span><span class="nv">+</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">- </span><span class="mi">1</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">information-gain</span> <span class="p">[</span><span class="nv">node-data</span> <span class="nv">leaf1-data</span> <span class="nv">leaf2-data</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">node-number-of-data</span> <span class="p">(</span><span class="nb">count </span><span class="nv">node-data</span><span class="p">)</span>
+        <span class="nv">node-gini-impurity</span> <span class="p">(</span><span class="nf">gini-impurity</span> <span class="p">(</span><span class="nb">map </span><span class="ss">:Classes</span> <span class="nv">node-data</span><span class="p">))</span>
+        <span class="nv">leaf1-number-of-data</span> <span class="p">(</span><span class="nb">count </span><span class="nv">leaf1-data</span><span class="p">)</span>
+        <span class="nv">leaf1-gini-impurity</span> <span class="p">(</span><span class="nf">gini-impurity</span> <span class="p">(</span><span class="nb">map </span><span class="ss">:Classes</span> <span class="nv">leaf1-data</span><span class="p">))</span>
+        <span class="nv">leaf2-number-of-data</span> <span class="p">(</span><span class="nb">count </span><span class="nv">leaf2-data</span><span class="p">)</span>
+        <span class="nv">leaf2-gini-impurity</span> <span class="p">(</span><span class="nf">gini-impurity</span> <span class="p">(</span><span class="nb">map </span><span class="ss">:Classes</span> <span class="nv">leaf2-data</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">- </span><span class="nv">node-gini-impurity</span>
+       <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">/ </span><span class="nv">leaf1-number-of-data</span> <span class="nv">node-number-of-data</span><span class="p">)</span> <span class="nv">leaf1-gini-impurity</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">/ </span><span class="nv">leaf2-number-of-data</span> <span class="nv">node-number-of-data</span><span class="p">)</span> <span class="nv">leaf2-gini-impurity</span><span class="p">)))))</span>
+
+
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::feature</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
+                       <span class="ss">:keyword</span> <span class="nv">keyword?</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::threshold</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
+                         <span class="ss">:number</span> <span class="nv">number?</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::data</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="nv">map?</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::left</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
+                    <span class="ss">:map?</span> <span class="ss">::node</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::right</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
+                     <span class="ss">:map?</span> <span class="ss">::node</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::node</span>  <span class="p">(</span><span class="nf">s/keys</span> <span class="ss">:req-un</span> <span class="p">[</span><span class="ss">::feature</span> <span class="ss">::threshold</span> <span class="ss">::data</span> <span class="ss">::left</span> <span class="ss">::right</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">count-number-of-kinds-of-objective-variables</span>
+  <span class="p">[</span><span class="nv">data</span> <span class="nv">key-of-objective-variable</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::data</span> <span class="nv">data</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="nb">keyword? </span><span class="nv">key-of-objective-variable</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="nv">int?</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">data</span>
+       <span class="p">(</span><span class="nb">map </span><span class="nv">key-of-objective-variable</span><span class="p">)</span>
+       <span class="nv">set</span>
+       <span class="nv">count</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">get-explanatory-variables-from</span>
+  <span class="p">[</span><span class="nv">data</span> <span class="nv">key-of-objective-variable</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::data</span> <span class="nv">data</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="nb">keyword? </span><span class="nv">key-of-objective-variable</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[</span><span class="nv">s/valid?</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="nv">keyword?</span><span class="p">)</span> <span class="nv">%</span><span class="p">]}</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="nv">data</span><span class="p">)</span>
+       <span class="nv">keys</span>
+       <span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial not= </span><span class="nv">key-of-objective-variable</span><span class="p">))))</span>
+
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">get-threshold-point-candidates</span>
+  <span class="p">[</span><span class="nv">data</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::data</span> <span class="nv">data</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="nv">map?</span><span class="p">)</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">features</span> <span class="p">(</span><span class="nf">get-explanatory-variables-from</span> <span class="nv">data</span> <span class="ss">:Classes</span><span class="p">)</span>
+        <span class="nv">get-threshold-point-candidates-one-feature</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">data</span> <span class="nv">feature</span><span class="p">]</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">select-keys </span><span class="nv">%1</span> <span class="p">[</span><span class="nv">feature</span><span class="p">])</span> <span class="nv">data</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nb">partial </span><span class="nv">get-threshold-point-candidates-one-feature</span> <span class="nv">data</span><span class="p">)</span> <span class="nv">features</span><span class="p">)</span>
+         <span class="nv">flatten</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">create-node-from-data</span>
+  <span class="p">[</span><span class="nv">data</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::data</span> <span class="nv">data</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[</span><span class="nv">s/valid?</span> <span class="ss">::node</span> <span class="nv">%</span><span class="p">]}</span>
+  <span class="p">{</span><span class="ss">:feature</span> <span class="nv">nil</span> <span class="ss">:threshold</span> <span class="nv">nil</span> <span class="ss">:data</span> <span class="nv">data</span> <span class="ss">:right</span> <span class="nv">nil</span> <span class="ss">:left</span> <span class="nv">nil</span><span class="p">})</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">split-one-node</span>
+  <span class="p">[</span><span class="nb">node </span><span class="nv">threshold</span> <span class="nv">key</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">node</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="ss">::threshold</span> <span class="nv">threshold</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="ss">::feature</span> <span class="nv">key</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">left-data</span> <span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nb">&gt; </span><span class="p">(</span><span class="nb">key </span><span class="nv">%1</span><span class="p">)</span> <span class="nv">threshold</span><span class="p">)</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">))</span>
+        <span class="nv">left-node</span> <span class="p">(</span><span class="nf">create-node-from-data</span> <span class="nv">left-data</span><span class="p">)</span>
+        <span class="nv">right-data</span> <span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="nb">key </span><span class="nv">%1</span><span class="p">)</span> <span class="nv">threshold</span><span class="p">)</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">))</span>
+        <span class="nv">right-node</span> <span class="p">(</span><span class="nf">create-node-from-data</span> <span class="nv">right-data</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">node</span>
+        <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:feature</span> <span class="nv">key</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:threshold</span> <span class="nv">threshold</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:left</span> <span class="nv">left-node</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:right</span> <span class="nv">right-node</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">calculate-information-gains</span>
+  <span class="p">[</span><span class="nv">node</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span>  <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">node</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="nv">map?</span><span class="p">)</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">get-threshold-point-candidates</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">split-one-node</span> <span class="nb">node </span><span class="p">((</span><span class="nb">comp first </span><span class="nv">vals</span><span class="p">)</span> <span class="nv">%1</span><span class="p">)</span> <span class="p">((</span><span class="nb">comp first </span><span class="nv">keys</span><span class="p">)</span> <span class="nv">%1</span><span class="p">)))</span>
+       <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">hash-map</span>
+               <span class="ss">:information-gain</span> <span class="p">(</span><span class="nf">information-gain</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="ss">:data</span> <span class="p">(</span><span class="ss">:left</span> <span class="nv">%</span><span class="p">))</span> <span class="p">(</span><span class="ss">:data</span> <span class="p">(</span><span class="ss">:right</span> <span class="nv">%</span><span class="p">)))</span>
+               <span class="ss">:threshold</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">%</span><span class="p">)</span>
+               <span class="ss">:feature</span> <span class="p">(</span><span class="ss">:feature</span> <span class="nv">%</span><span class="p">)))))</span>
+
+
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">stop-split?</span>
+  <span class="p">[</span><span class="nb">node </span><span class="nv">max-depth</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">max-depth</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">))</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="nf">count-number-of-kinds-of-objective-variables</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">)</span> <span class="ss">:Classes</span><span class="p">)</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">get-maximum-information-gain-splitter</span>
+  <span class="p">[</span><span class="nv">node</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">calculate-information-gains</span> <span class="nv">node</span><span class="p">)</span>
+       <span class="c1">;; max-key returns a last element if there are exact same values.</span>
+       <span class="c1">;; So we added shuffle because we want this function returns a random element in exact same values.</span>
+       <span class="nv">shuffle</span>
+       <span class="p">(</span><span class="nb">apply max-key </span><span class="ss">:information-gain</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">get-most-popular-objective-variable-values</span>
+  <span class="p">[</span><span class="nv">data</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">data</span>
+       <span class="p">(</span><span class="nb">map </span><span class="ss">:Classes</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">frequencies</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">apply max-key </span><span class="nv">val</span><span class="p">)</span>
+       <span class="nv">key</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">split-node</span>
+  <span class="p">[</span><span class="nb">node </span><span class="nv">threshold</span> <span class="nb">key </span><span class="nv">max-depth</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">node</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="ss">::threshold</span> <span class="nv">threshold</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">s/valid?</span> <span class="ss">::feature</span> <span class="nv">key</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">stop-split?</span> <span class="nb">node </span><span class="nv">max-depth</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">assoc node </span><span class="ss">:predict</span> <span class="p">(</span><span class="nf">get-most-popular-objective-variable-values</span> <span class="p">(</span><span class="ss">:data</span> <span class="nv">node</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">split</span> <span class="p">(</span><span class="nf">split-one-node</span> <span class="nb">node </span><span class="nv">threshold</span> <span class="nv">key</span><span class="p">)</span>
+          <span class="nv">left-node</span> <span class="p">(</span><span class="ss">:left</span> <span class="nv">split</span><span class="p">)</span>
+          <span class="nv">right-node</span> <span class="p">(</span><span class="ss">:right</span> <span class="nv">split</span><span class="p">)</span>
+          <span class="nv">left-splitter</span> <span class="p">(</span><span class="nf">get-maximum-information-gain-splitter</span> <span class="nv">left-node</span><span class="p">)</span>
+          <span class="nv">right-splitter</span> <span class="p">(</span><span class="nf">get-maximum-information-gain-splitter</span> <span class="nv">right-node</span><span class="p">)]</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">node</span>
+          <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:feature</span> <span class="nv">key</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:threshold</span> <span class="nv">threshold</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:left</span> <span class="p">(</span><span class="nf">split-node</span> <span class="nv">left-node</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">left-splitter</span><span class="p">)</span> <span class="p">(</span><span class="ss">:feature</span> <span class="nv">left-splitter</span><span class="p">)</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">max-depth</span><span class="p">)))</span>
+          <span class="p">(</span><span class="nf">update-value</span> <span class="ss">:right</span> <span class="p">(</span><span class="nf">split-node</span> <span class="nv">right-node</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">right-splitter</span><span class="p">)</span> <span class="p">(</span><span class="ss">:feature</span> <span class="nv">right-splitter</span><span class="p">)</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">max-depth</span><span class="p">)))))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">make-decision-tree</span>
+  <span class="p">[</span><span class="nv">train-data</span> <span class="nv">max-depth</span> <span class="nv">key-of-objective-variable</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::data</span> <span class="nv">train-data</span><span class="p">)]</span>
+   <span class="ss">:post</span> <span class="p">[(</span><span class="nf">s/valid?</span> <span class="ss">::node</span> <span class="nv">%</span><span class="p">)]}</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">train-data</span> <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nb">partial </span><span class="nv">update-key</span> <span class="nv">key-of-objective-variable</span> <span class="ss">:Classes</span><span class="p">)</span> <span class="nv">train-data</span><span class="p">)</span>
+        <span class="nb">node </span><span class="p">(</span><span class="nf">create-node-from-data</span> <span class="nv">train-data</span><span class="p">)</span>
+        <span class="nv">splitter</span> <span class="p">(</span><span class="nf">get-maximum-information-gain-splitter</span> <span class="nv">node</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">split-node</span> <span class="nb">node </span><span class="p">(</span><span class="ss">:threshold</span> <span class="nv">splitter</span><span class="p">)</span> <span class="p">(</span><span class="ss">:feature</span> <span class="nv">splitter</span><span class="p">)</span> <span class="nv">max-depth</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">predict</span>
+  <span class="p">[</span><span class="nv">tree</span> <span class="nv">data</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">nil? </span><span class="p">(</span><span class="ss">:predict</span> <span class="nv">tree</span><span class="p">)))</span>
+        <span class="p">(</span><span class="ss">:predict</span> <span class="nv">tree</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">&gt; </span><span class="p">((</span><span class="ss">:feature</span> <span class="nv">tree</span><span class="p">)</span> <span class="nv">data</span><span class="p">)</span> <span class="p">(</span><span class="ss">:threshold</span> <span class="nv">tree</span><span class="p">))</span> <span class="p">(</span><span class="nf">predict</span> <span class="p">(</span><span class="ss">:left</span> <span class="nv">tree</span><span class="p">)</span> <span class="nv">data</span><span class="p">)</span>
+        <span class="ss">:else</span> <span class="p">(</span><span class="nf">predict</span> <span class="p">(</span><span class="ss">:right</span> <span class="nv">tree</span><span class="p">)</span> <span class="nv">data</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#&#39;decision-tree.core/predict</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">tree</span> <span class="p">(</span><span class="nf">make-decision-tree</span> <span class="nv">trainingData</span> <span class="mi">3</span> <span class="ss">:quality</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#&#39;decision-tree.core/tree</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">predict</span> <span class="nv">tree</span> <span class="p">(</span><span class="nb">first </span><span class="nv">testingData</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#34;buena calidad&#34;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nb">first </span><span class="nv">testingData</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#decision_tree.core.Wine{:fixed_acidity 9.8, :volatile_acidity 0.3, :citrid_acid 0.39, :chlorides 0.062, :sulphates 0.57, :alcohol 11.5, :quality &#34;buena calidad&#34;}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">test_TestingData</span> <span class="p">[]</span> 
+    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">predictData</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">predict</span> <span class="nv">tree</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">testingData</span><span class="p">)</span> <span class="nv">realData</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="ss">:quality</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">testingData</span><span class="p">)]</span>
+        <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">x</span> <span class="nv">predictData</span> <span class="nv">y</span>  <span class="nv">realData</span> <span class="nv">equals</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">x</span><span class="p">)</span> 
+                <span class="nv">equals</span> 
+                <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">y</span><span class="p">)</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">first </span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">first </span><span class="nv">y</span><span class="p">))</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">equals</span><span class="p">)</span> <span class="nv">equals</span><span class="p">)))</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>#&#39;decision-tree.core/test_TestingData</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">test_TestingData</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[42]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>228</pre>
 </div>
 
 </div>
