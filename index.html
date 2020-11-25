@@ -14276,14 +14276,13 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">cemerick.pomegranate</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">add-dependencies</span><span class="p">]])</span>
 <span class="p">(</span><span class="nf">add-dependencies</span> <span class="ss">:coordinates</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/data.csv</span> <span class="s">&quot;0.1.2&quot;</span><span class="p">]])</span>
 <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.data.csv</span> <span class="ss">:as</span> <span class="nv">csv</span><span class="p">])</span>
 <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.spec.alpha</span> <span class="ss">:as</span> <span class="nv">s</span><span class="p">])</span>
-<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.data.json</span> <span class="ss">:as</span> <span class="nv">json</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14299,7 +14298,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
 
 
 
@@ -14557,7 +14556,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">update-key</span> <span class="p">[</span><span class="nv">from-key</span> <span class="nv">to-key</span> <span class="nv">map</span><span class="p">]</span>
@@ -14567,9 +14566,6 @@ a.anchor-link {
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">update-value</span> <span class="p">[</span><span class="nb">map key </span><span class="nv">updated-value</span><span class="p">]</span>
   <span class="p">(</span><span class="nf">update</span> <span class="nb">map key </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nb">identity </span><span class="nv">updated-value</span><span class="p">))))</span>
-
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::objective-variable</span> <span class="nv">string?</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::objective-variable-vector</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="ss">::objective-variable</span><span class="p">))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">gini-impurity</span> <span class="p">[</span><span class="nv">y</span><span class="p">]</span>
   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">number-of-each-data</span> <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">y</span><span class="p">)</span>
@@ -14592,18 +14588,7 @@ a.anchor-link {
        <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">/ </span><span class="nv">leaf1-number-of-data</span> <span class="nv">node-number-of-data</span><span class="p">)</span> <span class="nv">leaf1-gini-impurity</span><span class="p">)</span>
           <span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">/ </span><span class="nv">leaf2-number-of-data</span> <span class="nv">node-number-of-data</span><span class="p">)</span> <span class="nv">leaf2-gini-impurity</span><span class="p">)))))</span>
 
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::feature</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
-                       <span class="ss">:keyword</span> <span class="nv">keyword?</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::threshold</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
-                         <span class="ss">:number</span> <span class="nv">number?</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::data</span> <span class="p">(</span><span class="nf">s/coll-of</span> <span class="nv">map?</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::left</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
-                    <span class="ss">:map?</span> <span class="ss">::node</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::right</span> <span class="p">(</span><span class="nf">s/or</span> <span class="ss">:nil</span> <span class="nv">nil?</span>
-                     <span class="ss">:map?</span> <span class="ss">::node</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">s/def</span> <span class="ss">::node</span>  <span class="p">(</span><span class="nf">s/keys</span> <span class="ss">:req-un</span> <span class="p">[</span><span class="ss">::feature</span> <span class="ss">::threshold</span> <span class="ss">::data</span> <span class="ss">::left</span> <span class="ss">::right</span><span class="p">]))</span>
-
-<span class="p">(</span><span class="kd">defn- </span><span class="nv">count-number-of-kinds-of-objective-variables</span> <span class="p">[</span><span class="nv">data</span> <span class="nv">key-of-objective-variable</span><span class="p">]</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">count-number-of-kinds-of-objective-variables</span> <span class="p">[</span><span class="nv">data</span> <span class="nv">key-of-objective-variable</span><span class="p">]</span>
   <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">data</span>
        <span class="p">(</span><span class="nb">map </span><span class="nv">key-of-objective-variable</span><span class="p">)</span>
        <span class="nv">set</span>
@@ -14699,7 +14684,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
 
 
 
@@ -14717,7 +14702,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="k">def </span><span class="nv">tree</span> <span class="p">(</span><span class="nf">make-decision-tree</span> <span class="nv">trainingData</span> <span class="mi">3</span> <span class="ss">:quality</span><span class="p">))</span>
@@ -14736,7 +14721,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
 
 
 
@@ -14754,7 +14739,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">testCollection</span> <span class="p">[</span><span class="nv">tree</span> <span class="nv">testColl</span><span class="p">]</span> 
@@ -14777,7 +14762,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
 
 
 
@@ -14795,7 +14780,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nb">* </span><span class="mf">100.0</span> <span class="p">(</span><span class="nf">testCollection</span> <span class="nv">tree</span> <span class="nv">testingData</span><span class="p">))</span>
@@ -14814,50 +14799,13 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>71.25</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-clojure"><pre><span></span><span class="p">(</span><span class="nf">spit</span> <span class="s">&quot;arbol.json&quot;</span> <span class="p">(</span><span class="nf">json/write-str</span> <span class="nv">tree</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>nil</pre>
 </div>
 
 </div>
