@@ -1,8 +1,6 @@
 # ClojureDecisionTree
 
-Implementation of a clasification tree (a type of decision tree learning) in Clojure
-
-Demonstration with a dataset about [Red Wine Quality from Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009)
+Demonstration of a decision tree with a dataset about [Red Wine Quality from Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009)
 
 Check our Jupyter Notebook in [GitHub Pages](https://sebasrod23.github.io/ClojureDecisionTree/)
 
